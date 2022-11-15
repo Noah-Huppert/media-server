@@ -30,16 +30,16 @@ Although this repository contains configuration as code, there are still some st
    
    If you do not have a SSH key generate one using the command:
    ```bash
-   ssh-keygen -t ed25519 -f pi_ed25519 -C "pi"
+   ssh-keygen -t ed25519 -f keys/pi_ed25519 -C "pi"
    ```
-   (Do not commit these files to Git).
+   (Do not commit these files to Git)
 
 ## Configuration As Code Powered Setup
 The following steps indicate how to apply the steps in the configuration as code:
 
 1. Run Packer:
    ```bash
-   packer build -var "ssh_host=<pi host>" -var "ssh_auth_key=<ssh private key path>"
+   packer build -var "ssh_host=<pi host>" -var "ssh_auth_key=<ssh private key path>" ./packer
    ```
    Be sure to replace the following:
      - `<pi host>`: IP address or host of the PI server
