@@ -9,7 +9,7 @@ Configuration as code for Raspberry Pi media server.
 Configuration as code to setup a Jellyfin media server run on a Raspberry Pi.
 
 # Instructions
-Some instructions require a Unix shell environment. If not available the [`dev-container/`](./dev-container/) directory contains a Docker Compose stack with a Unix shell and all the required dependencies. 
+Some instructions require a Unix shell environment. If you do not have access to a Unix shell the [`dev-container/`](./dev-container/) directory contains instructions on how to use a Docker Compose stack with a Unix shell and all the required dependencies. 
 
 ## Bootstrapping
 Although this repository contains configuration as code, there are still some steps that must be performed manually:
