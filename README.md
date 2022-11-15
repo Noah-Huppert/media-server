@@ -25,6 +25,7 @@ Although this repository contains configuration as code, there are still some st
    Be sure to replace:
      - `<path to key file>`: Location of your SSH private key
      - `<pi host>`: IP address of your Raspberry PI  
+   
    If your SSH public key has a comment like `user@host` then the `ssh-copy-id` will try to use the user in the key comment. Replace this comment with something not in the username at host format.  
    
    If you do not have an SSH key generate one using the command:
