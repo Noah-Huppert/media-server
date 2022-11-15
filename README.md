@@ -28,14 +28,14 @@ Although this repository contains configuration as code, there are still some st
    
    If your SSH public key has a comment like `user@host` then the `ssh-copy-id` will try to use the user in the key comment. Replace this comment with something not in the username at host format.  
    
-   If you do not have an SSH key generate one using the command:
+   If you do not have a SSH key generate one using the command:
    ```bash
    ssh-keygen -t ed25519 -f pi_ed25519 -C "pi"
    ```
    (Do not commit these files to Git).
 
 ## Configuration As Code Powered Setup
-The following steps indicate how Packer can be used to setup the server using steps recorded via configuration as code:
+The following steps indicate how to apply the steps in the configuration as code:
 
 1. Run Packer:
    ```bash
