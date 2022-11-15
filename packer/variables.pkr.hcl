@@ -1,3 +1,4 @@
+# Connection
 variable "ssh_host" {
     type = string
     description = "IP or DNS name of server"

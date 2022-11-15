@@ -45,3 +45,9 @@ The following steps indicate how to apply the steps in the configuration as code
      - `<pi host>`: IP address or host of the PI server
      - `<ssh private key path>`: Path to the SSH private key used to authenticate with the PI
    The `-var "ssh_username=<username>"` option can also be passed to customize the Raspberry PI's login username.
+
+Packer has 2 build steps defined: `base-system` and `salt-apply`. The `base-system` build step bootstraps any dependencies needed to use the Salt configuration as code tool. The `salt-apply` step then uses Salt to configure the finer details of the system. To only re-run Salt execute `packer` with the `-only` option:
+
+```bash
+packer build -var "ssh_host=<pi host>" -var "ssh_auth_key=<ssh private key path>" -only=salt-apply.null.server ./packer
+```

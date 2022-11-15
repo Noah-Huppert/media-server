@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+declare -ri TRUE=0
+declare -ri FALSE=1
+
 # Output log message
 log () { # ( msg )
     local -r msg="$1"
@@ -20,6 +23,23 @@ run_check () { # ( cmd, exit_code, err_msg )
     if ! eval "$cmd"; then
         elog "$err_msg"
         exit $exit_code
+    fi
+}
+
+# Ensure environment variables are set.
+ensure_envs() { # ( envs... )
+    local -ra envs=("$@")
+    local -a missing_envs=()
+
+    for env_var in "${envs[@]}"; do
+        if [[ -z "${!env_var}" ]]; then
+            missing_envs+=("$env_var")
+        fi
+    done
+
+    if [[ -z "${missing_envs[@]}" ]]; then
+        elog "Environment variable(s) must be set: ${missing_envs[@]}"
+        return $FALSE
     fi
 }
 
