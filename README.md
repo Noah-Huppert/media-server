@@ -37,17 +37,19 @@ Although this repository contains configuration as code, there are still some st
 ## Configuration As Code Powered Setup
 The following steps indicate how to apply the steps in the configuration as code:
 
-1. Run Packer:
-   ```bash
-   packer build -var "ssh_host=<pi host>" -var "ssh_auth_key=<ssh private key path>" ./packer
+1. Create a file named `packer/host.pkrvars.hcl` with the contents:
+   ```hcl
+   ssh_host = "<pi host>"
    ```
-   Be sure to replace the following:
-     - `<pi host>`: IP address or host of the PI server
-     - `<ssh private key path>`: Path to the SSH private key used to authenticate with the PI
-   The `-var "ssh_username=<username>"` option can also be passed to customize the Raspberry PI's login username.
+   This file will be provided to Packer and will set variable values in [`./packer/variables.pkr.hcl`](./packer/variables.pkr.hcl). Check the default values of these variables, if any do not match your environment place new values in the `host.pkrvars.hcl` file.
+2. Run Packer:
+   ```bash
+   ./scripts/packer-build.sh
+   ```
+   This may fail the first time, as certain Kernel options are set which require a reboot to work. SSH into the server, reboot, and re-run the above command.
 
-Packer has 2 build steps defined: `base-system` and `salt-apply`. The `base-system` build step bootstraps any dependencies needed to use the Salt configuration as code tool. The `salt-apply` step then uses Salt to configure the finer details of the system. To only re-run Salt execute `packer` with the `-only` option:
+Packer has 2 build steps defined: `base-system` and `salt-apply`. The `base-system` build step bootstraps any dependencies needed to use the Salt configuration as code tool. The `salt-apply` step then uses Salt to configure the finer details of the system. To only re-run Salt execute `./scripts/packer-build.sh` with the `salt-apply` argument.
 
 ```bash
-packer build -var "ssh_host=<pi host>" -var "ssh_auth_key=<ssh private key path>" -only=salt-apply.null.server ./packer
+./scripts/packer-build.sh salt-apply
 ```

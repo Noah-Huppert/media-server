@@ -6,7 +6,7 @@ source "null" "server" {
 }
 
 locals {
-    remote_wrk_dir = "/tmp"
+    remote_wrk_dir = "/opt/rpi-media-server-setup/packer"
 }
 
 build {
@@ -17,6 +17,14 @@ build {
     ]
 
     # Copy scripts
+    provisioner "shell" {
+        inline = [
+            "sudo mkdir -p ${local.remote_wrk_dir}",
+            "sudo chown ${var.ssh_username} ${local.remote_wrk_dir}",
+            "sudo chgrp ${var.ssh_username} ${local.remote_wrk_dir}",
+        ]
+    }
+
     provisioner "file" {
         source = "${path.root}/remote-scripts/common.sh"
         destination = "${local.remote_wrk_dir}/common.sh"
