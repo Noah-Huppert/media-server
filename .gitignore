@@ -2,3 +2,6 @@
 keys/
 pi_ed25519*
 !keys/.gitkeep
+
+# Packer variables
+packer/*.pkrvars.hcl
